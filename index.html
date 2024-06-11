@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Management Log</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="date"],
+        input[type="time"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .log {
+            margin-top: 20px;
+        }
+        .log-entry {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        .nda {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-top: 15px;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Visitor Management Log</h1>
+    <div class="form-group">
+        <label for="visitor-name">Visitor Name:</label>
+        <input type="text" id="visitor-name" required>
+    </div>
+    <div class="form-group">
+        <label for="visit-date">Date of Visit:</label>
+        <input type="date" id="visit-date" required>
+    </div>
+    <div class="form-group">
+        <label for="departure-time">Departure Time:</label>
+        <input type="time" id="departure-time" required>
+    </div>
+    <div class="form-group nda">
+        <h3>Non-Disclosure Agreement (NDA)</h3>
+        <p>
+            Please review the NDA: <a href="path/to/your/nda.pdf" target="_blank">View NDA</a>
+        </p>
+        <iframe src="path/to/your/nda.pdf"></iframe>
+        <label for="nda-signature">Visitor Signature:</label>
+        <input type="text" id="nda-signature" placeholder="Type your name here" required>
+    </div>
+    <button onclick="addVisitor()">Add Visitor</button>
+
+    <div class="log" id="log"></div>
+</div>
+
+<script>
+    function addVisitor() {
+        const name = document.getElementById('visitor-name').value;
+        const date = document.getElementById('visit-date').value;
+        const departure = document.getElementById('departure-time').value;
+        const signature = document.getElementById('nda-signature').value;
+
+        if (name && date && departure && signature) {
+            const log = document.getElementById('log');
+            const entry = document.createElement('div');
+            entry.classList.add('log-entry');
+            entry.innerHTML = `
+                <p><strong>Visitor Name:</strong> ${name}</p>
+                <p><strong>Date of Visit:</strong> ${date}</p>
+                <p><strong>Departure Time:</strong> ${departure}</p>
+                <p><strong>Visitor Signature:</strong> ${signature}</p>
+            `;
+            log.appendChild(entry);
+
+            // Clear the form
+            document.getElementById('visitor-name').value = '';
+            document.getElementById('visit-date').value = '';
+            document.getElementById('departure-time').value = '';
+            document.getElementById('nda-signature').value = '';
+        } else {
+            alert('Please fill in all fields.');
+        }
+    }
+</script>
+
+</body>
+</html>
